@@ -241,7 +241,9 @@ subset::Subset::client_subset_usage(void)
     static std::string _s("\n"                                          \
                           "  Usage:\n"                                  \
                           "\n"                                          \
-                          "  $ subset --line-numbers=<str> --input=<str> [ --output=<str> ]\n");
+                          "  $ subset [ --line-numbers=<str> | --start-index=<int> --number-of-lines=<int> ]\n" \
+                          "             --input=<str>\n" \
+                          "           [ --output=<str> ]\n");
     return _s;
 }
 
@@ -259,10 +261,15 @@ std::string
 subset::Subset::client_subset_io_options(void)
 {
     static std::string _s("  General Options:\n\n"              \
-                          "  --line-numbers=s        Line numbers filename (string)\n" \
+                          "  --start-index=i         Starting line (0-indexed) from which to begin writing lines\n" \
+                          "                          from input (integer, optional)\n" \
+                          "  --number-of-lines=i     Number of lines to write out after the start index (integer)\n" \
+                          "  --line-numbers=s        Line numbers filename (string, optional)\n" \
                           "  --input=s               Input filename (string)\n" \
                           "  --output=s              Output filename (string, optional)\n" \
-                          "                          If omitted, output is written to stdout\n");
+                          "                          If omitted, output is written to stdout\n\n" \
+                          "  You must use either --line-numbers or the --start-index/--number-of-lines pair. You cannot\n" \
+                          "  use both options, however.\n");
     return _s;
 }
 
